@@ -54,6 +54,7 @@ public class Eatable : MonoBehaviour
             timer++;
             yield return new WaitForSeconds(1);
         }
-        pointsText.gameObject.SetActive(false);
+        if(pointsText != null)
+            pointsText.gameObject.SetActive(false);
     }
 }

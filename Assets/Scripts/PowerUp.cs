@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Dot : Eatable
+public class PowerUp : Eatable
 {
-    public event Action RemoveDot;
+    public event Action TurnGhostsBlue;
 
     // Start is called before the first frame update
     void Start()
     {
-        points = 10;
+        points = 50;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            RemoveDot?.Invoke();
+            TurnGhostsBlue?.Invoke();
             HandleObjectWasEaten();
         }
     }
