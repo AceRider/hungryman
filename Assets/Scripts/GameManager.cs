@@ -29,30 +29,36 @@ public class GameManager : MonoBehaviour
 
     private void IncreaseScore(bool isIncrease)
     {
-        foreach (Transform dot in dots.transform.GetComponentInChildren<Transform>())
+        if (dots != null)
         {
-            Dot dotScript = dot.gameObject.GetComponent<Dot>();
-            if (dotScript != null)
+            foreach (Transform dot in dots.transform.GetComponentInChildren<Transform>())
             {
-                if (isIncrease)
-                    dotScript.IncreaseScore += HandleIncreaseScore;
-                else
-                    dotScript.IncreaseScore -= HandleIncreaseScore;
+                Dot dotScript = dot.gameObject.GetComponent<Dot>();
+                if (dotScript != null)
+                {
+                    if (isIncrease)
+                        dotScript.IncreaseScore += HandleIncreaseScore;
+                    else
+                        dotScript.IncreaseScore -= HandleIncreaseScore;
+                }
             }
         }
     }
 
     private void GotPowerUp(bool gotPowerUp)
     {
-        foreach (Transform powerUp in powerUps.transform.GetComponentInChildren<Transform>())
+        if (powerUps != null)
         {
-            PowerUp powerUpScript = powerUp.gameObject.GetComponent<PowerUp>();
-            if (powerUpScript != null)
+            foreach (Transform powerUp in powerUps.transform.GetComponentInChildren<Transform>())
             {
-                if (gotPowerUp)
-                    powerUpScript.IncreaseScore += HandleIncreaseScore;
-                else
-                    powerUpScript.IncreaseScore -= HandleIncreaseScore;
+                PowerUp powerUpScript = powerUp.gameObject.GetComponent<PowerUp>();
+                if (powerUpScript != null)
+                {
+                    if (gotPowerUp)
+                        powerUpScript.IncreaseScore += HandleIncreaseScore;
+                    else
+                        powerUpScript.IncreaseScore -= HandleIncreaseScore;
+                }
             }
         }
     }
