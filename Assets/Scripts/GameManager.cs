@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     {
         GameState.dotCount = 130;
         GameState.powerUpCount = 4;
+        uiController.DisplayLivesImages();
         IncreaseScore(true);
         GotPowerUp(true);
         GameState.highScore = PlayerPrefs.GetInt(SceneUtils.HIGHSCORE_STR, 0);
@@ -154,6 +155,16 @@ public class GameManager : MonoBehaviour
             {
                 col2D.enabled = true;
             }
+        }
+    }
+
+    void CheckIfPlayerEarnedExtraLife()
+    {
+        if(GameState.score >= GameState.extraLifePoints && !GameState.hasExtraLifeBeenGiven)
+        {
+            GameState.hasExtraLifeBeenGiven = true;
+            GameState.numberOfLives++;
+            uiController.DisplayLivesImages();
         }
     }
 }

@@ -9,4 +9,7 @@ public class GameState : MonoBehaviour
     public static int dotCount;
     public static int powerUpCount;
     public static int level;
+    public static int numberOfLives = 3;
+    public static int extraLifePoints;
+    public static bool hasExtraLifeBeenGiven;
 }

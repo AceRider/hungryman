@@ -10,6 +10,8 @@ public class UIController : MonoBehaviour
     private TMPro.TextMeshProUGUI highScoreText;
     [SerializeField]
     private List<GameObject> levelIndicators;
+    [SerializeField]
+    private List<GameObject> lives;
 
     public void SetScoreText(int score)
     {
@@ -24,6 +26,18 @@ public class UIController : MonoBehaviour
         for(int i = 1; i <= GameState.level; i++)
         {
             levelIndicators[i].SetActive(true);
+        }
+    }
+    public void DisplayLivesImages()
+    {
+        for (int i = 0; i < lives.Count; i++)
+        {
+            lives[i].SetActive(false);
+        }
+
+        for (int i = 0; i < GameState.numberOfLives - 1; i++)
+        {
+            lives[i].SetActive(true);
         }
     }
 }

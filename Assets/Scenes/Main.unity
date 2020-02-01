@@ -694,6 +694,12 @@ MonoBehaviour:
   - {fileID: 881727871}
   - {fileID: 2056596778}
   - {fileID: 1834327052}
+  lives:
+  - {fileID: 492749687}
+  - {fileID: 1193514805}
+  - {fileID: 246031210}
+  - {fileID: 556895564}
+  - {fileID: 1117546585}
 --- !u!114 &235911718
 MonoBehaviour:
   m_ObjectHideFlags: 0
