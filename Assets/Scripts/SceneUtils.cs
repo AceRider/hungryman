@@ -5,4 +5,5 @@ using UnityEngine;
 public class SceneUtils
 {
     public const string Settings = "Settings";
+    public const string HighScore = "HighScore";
 }
