@@ -47,19 +47,19 @@ public class PlayerMovement : MonoBehaviour
 
             if (direction == 0)
             {
-                transform.position += new Vector3(1 * Time.deltaTime, 0, 0);
+                transform.position += new Vector3(2 * Time.deltaTime, 0, 0);
             }
             else if (direction == -90f)
             {
-                transform.position += new Vector3(0, -1 * Time.deltaTime, 0);
+                transform.position += new Vector3(0, -2 * Time.deltaTime, 0);
             }
             else if (direction == 180f)
             {
-                transform.position += new Vector3(-1 * Time.deltaTime, 0, 0);
+                transform.position += new Vector3(-2 * Time.deltaTime, 0, 0);
             }
             else
             {
-                transform.position += new Vector3(0, 1 * Time.deltaTime, 0);
+                transform.position += new Vector3(0, 2 * Time.deltaTime, 0);
             }
         }
     }
@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
         playerAnimator.enabled = active;
     }
 
-    IEnumerator AddDelayBeforeGameStart()
+    public IEnumerator AddDelayBeforeGameStart()
     {
         canIMove = false;
         int timer = 0;

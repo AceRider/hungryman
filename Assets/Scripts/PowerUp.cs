@@ -19,6 +19,7 @@ public class PowerUp : Eatable
         {
             TurnGhostsBlue?.Invoke();
             HandleObjectWasEaten();
+            GameState.powerUpCount--;
         }
     }
 }

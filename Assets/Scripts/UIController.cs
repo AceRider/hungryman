@@ -8,6 +8,8 @@ public class UIController : MonoBehaviour
     private TMPro.TextMeshProUGUI scoreText;
     [SerializeField]
     private TMPro.TextMeshProUGUI highScoreText;
+    [SerializeField]
+    private List<GameObject> levelIndicators;
 
     public void SetScoreText(int score)
     {
@@ -16,5 +18,12 @@ public class UIController : MonoBehaviour
     public void SetHighScoreText(int score)
     {
         highScoreText.text = score.ToString();
+    }
+    public void ShowLevelIndicators()
+    {
+        for(int i = 1; i <= GameState.level; i++)
+        {
+            levelIndicators[i].SetActive(true);
+        }
     }
 }

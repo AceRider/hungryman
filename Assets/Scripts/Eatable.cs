@@ -41,8 +41,8 @@ public class Eatable : MonoBehaviour
         {
             pointsText.gameObject.SetActive(true);
             pointsText.text = points.ToString();
+            StartCoroutine(StartTimerToHideText());
         }
-        StartCoroutine(StartTimerToHideText());
         IncreaseScore?.Invoke(points);
     }
 
