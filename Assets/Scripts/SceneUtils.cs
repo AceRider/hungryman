@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class SceneUtils
 {
+    public const string HIGHSCORE_STR = "HighScore";
+
     public const string Settings = "Settings";
-    public const string HighScore = "HighScore";
+    public const string ActI = "ActI";
+    public const string Main = "Main";
+    
 }

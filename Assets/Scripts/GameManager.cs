@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
         GameState.powerUpCount = 4;
         IncreaseScore(true);
         GotPowerUp(true);
-        GameState.highScore = PlayerPrefs.GetInt(SceneUtils.HighScore, 0);
+        GameState.highScore = PlayerPrefs.GetInt(SceneUtils.HIGHSCORE_STR, 0);
         uiController.SetHighScoreText(GameState.highScore);
     }
 
@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        PlayerPrefs.SetInt(SceneUtils.HighScore, GameState.highScore);
+        PlayerPrefs.SetInt(SceneUtils.HIGHSCORE_STR, GameState.highScore);
     }
 
     void HandleIncreaseScore(int amount)
