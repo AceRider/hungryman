@@ -6,7 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
     private GameObject player;
-
+    [SerializeField]
+    float speed = 1.5f;
     [SerializeField]
     private Animator playerAnimator;
 
@@ -47,19 +48,19 @@ public class PlayerMovement : MonoBehaviour
 
             if (direction == 0)
             {
-                transform.position += new Vector3(2 * Time.deltaTime, 0, 0);
+                transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
             }
             else if (direction == -90f)
             {
-                transform.position += new Vector3(0, -2 * Time.deltaTime, 0);
+                transform.position += new Vector3(0, -speed * Time.deltaTime, 0);
             }
             else if (direction == 180f)
             {
-                transform.position += new Vector3(-2 * Time.deltaTime, 0, 0);
+                transform.position += new Vector3(-speed * Time.deltaTime, 0, 0);
             }
             else
             {
-                transform.position += new Vector3(0, 2 * Time.deltaTime, 0);
+                transform.position += new Vector3(0, speed * Time.deltaTime, 0);
             }
         }
     }

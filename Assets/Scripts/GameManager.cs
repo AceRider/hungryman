@@ -15,13 +15,16 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<GameObject> mazes;   
     [SerializeField]
-    private List<GameObject> dotsList;  
+    private List<GameObject> dotsList;
+    [SerializeField]
+    private List<GameObject> ghosts;
 
     private void OnEnable()
     {
         GameState.dotCount = 130;
         GameState.powerUpCount = 4;
         uiController.DisplayLivesImages();
+        StartCoroutine(HandleMoveGhosts());
         IncreaseScore(true);
         GotPowerUp(true);
         GameState.highScore = PlayerPrefs.GetInt(SceneUtils.HIGHSCORE_STR, 0);
@@ -120,6 +123,7 @@ public class GameManager : MonoBehaviour
             playerMovement.ResetPlayer();
             uiController.ShowLevelIndicators();
             StartCoroutine(playerMovement.AddDelayBeforeGameStart());
+            StartCoroutine(HandleMoveGhosts());
         }
     }
 
@@ -165,6 +169,33 @@ public class GameManager : MonoBehaviour
             GameState.hasExtraLifeBeenGiven = true;
             GameState.numberOfLives++;
             uiController.DisplayLivesImages();
+        }
+    }
+
+    IEnumerator HandleMoveGhosts()
+    {
+        int timer = 0;
+
+        while (timer < 10)
+        {
+            if (timer > 8)
+            {     
+                ghosts[3].GetComponent<GhostMove>().enabled = true;
+            }
+            else if (timer > 6)
+            {
+                ghosts[2].GetComponent<GhostMove>().enabled = true;
+            }
+            else if (timer > 4)
+            {
+                ghosts[1].GetComponent<GhostMove>().enabled = true;
+            }
+            else
+            {
+                ghosts[0].GetComponent<GhostMove>().enabled = true;
+            }
+            timer++;
+            yield return new WaitForSeconds(1);
         }
     }
 }
