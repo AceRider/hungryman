@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,11 +14,14 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private PlayerMovement playerMovement;
     [SerializeField]
+    private Animator playerAnimator;
+    [SerializeField]
     private List<GameObject> mazes;   
     [SerializeField]
     private List<GameObject> dotsList;
     [SerializeField]
     private List<GameObject> ghosts;
+  
 
     private void OnEnable()
     {
@@ -27,6 +31,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(HandleMoveGhosts());
         IncreaseScore(true);
         GotPowerUp(true);
+        GhostCollider(true);
         GameState.highScore = PlayerPrefs.GetInt(SceneUtils.HIGHSCORE_STR, 0);
         uiController.SetHighScoreText(GameState.highScore);
     }
@@ -35,6 +40,28 @@ public class GameManager : MonoBehaviour
     {
         IncreaseScore(false);
         GotPowerUp(false);
+        GhostCollider(false);
+    }
+
+    private void GhostCollider(bool isCollider)
+    {
+        foreach (GameObject ghost in ghosts)
+        {
+            Ghost ghostScript = ghost.GetComponent<Ghost>();
+            if (ghostScript != null)
+            {
+                if (isCollider)
+                {
+                    ghostScript.GhostCollidedWithPlayer += HandleGhostCollidedWithPlayer;
+                    //ghostScript.IncreaseScore += HandleIncreaseScore;
+                }
+                else
+                {
+                    ghostScript.GhostCollidedWithPlayer -= HandleGhostCollidedWithPlayer;
+                    //ghostScript.IncreaseScore -= HandleIncreaseScore;
+                }
+            }
+        }
     }
 
     private void IncreaseScore(bool isIncrease)
@@ -197,5 +224,65 @@ public class GameManager : MonoBehaviour
             timer++;
             yield return new WaitForSeconds(1);
         }
+    }
+
+    IEnumerator HandlePlayerFaintAftermath()
+    {
+        int timer = 0;
+
+        while (timer < 2)
+        {
+            timer++;
+            yield return new WaitForSeconds(1);
+        }
+
+        GameState.numberOfLives--;
+
+        if (GameState.numberOfLives > 0)
+        {
+            uiController.DisplayLivesImages();
+            playerAnimator.SetBool("faint", false);
+            playerMovement.ResetPlayer();
+            GhostsBackToBox();
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneUtils.Start);
+        }
+    }
+
+    void HandleGhostCollidedWithPlayer()
+    {
+        playerAnimator.SetBool("faint", true);
+        playerMovement.canIMove = false;
+
+        foreach (GameObject ghost in ghosts)
+        {
+            ghost.SetActive(false);
+        }
+
+        StartCoroutine(HandlePlayerFaintAftermath());
+    }
+
+    void GhostsBackToBox()
+    {
+        foreach (GameObject ghost in ghosts)
+        {
+            ghost.SetActive(true);
+            GhostMove ghostMoveScript = ghost.GetComponent<GhostMove>();
+
+            if (ghostMoveScript != null)
+            {
+                ghostMoveScript.enabled = false;
+            }
+
+            Ghost ghostScript = ghost.GetComponent<Ghost>();
+            if (ghostScript != null)
+            {
+                ghostScript.ResetGhost();
+            }
+        }
+
+        StartCoroutine(HandleMoveGhosts());
     }
 }
