@@ -21,8 +21,9 @@ public class GameManager : MonoBehaviour
     private List<GameObject> dotsList;
     [SerializeField]
     private List<GameObject> ghosts;
-  
 
+    static Coroutine ghostsBlueCoroutine;
+    
     private void OnEnable()
     {
         GameState.dotCount = 130;
@@ -53,12 +54,12 @@ public class GameManager : MonoBehaviour
                 if (isCollider)
                 {
                     ghostScript.GhostCollidedWithPlayer += HandleGhostCollidedWithPlayer;
-                    //ghostScript.IncreaseScore += HandleIncreaseScore;
+                    ghostScript.IncreaseScore += HandleIncreaseScore;
                 }
                 else
                 {
                     ghostScript.GhostCollidedWithPlayer -= HandleGhostCollidedWithPlayer;
-                    //ghostScript.IncreaseScore -= HandleIncreaseScore;
+                    ghostScript.IncreaseScore -= HandleIncreaseScore;
                 }
             }
         }
@@ -98,9 +99,15 @@ public class GameManager : MonoBehaviour
                 if (powerUpScript != null)
                 {
                     if (gotPowerUp)
+                    {
                         powerUpScript.IncreaseScore += HandleIncreaseScore;
+                        powerUpScript.TurnGhostsBlue += HandleTurnGhostsBlue;
+                    }
                     else
+                    {
                         powerUpScript.IncreaseScore -= HandleIncreaseScore;
+                        powerUpScript.TurnGhostsBlue -= HandleTurnGhostsBlue;
+                    }
                 }
             }
         }
@@ -284,5 +291,52 @@ public class GameManager : MonoBehaviour
         }
 
         StartCoroutine(HandleMoveGhosts());
+    }
+
+    void HandleTurnGhostsBlue()
+    {
+        if (ghostsBlueCoroutine != null)
+        {
+            StopCoroutine(HandleTurnGhostsBackToNormal());
+        }
+
+        GameState.powerUpCount--;
+        CheckIfBoardHasBeenCleared();
+
+        foreach (GameObject ghost in ghosts)
+        {
+            Ghost ghostScript = ghost.GetComponent<Ghost>();
+            if (ghostScript != null)
+            {
+                ghostScript.TurnGhostBlue();
+                ghostsBlueCoroutine = StartCoroutine(HandleTurnGhostsBackToNormal());
+            }
+        }
+    }
+
+    IEnumerator HandleTurnGhostsBackToNormal()
+    {
+        int timer = 0;
+
+        while (timer < 10)
+        {
+            timer++;
+            yield return new WaitForSeconds(1);
+        }
+
+        TurnGhostsRegularColor();
+        GameState.consecutiveGhostsEaten = 0;
+    }
+
+    void TurnGhostsRegularColor()
+    {
+        foreach (GameObject ghost in ghosts)
+        {
+            Ghost ghostScript = ghost.GetComponent<Ghost>();
+            if (ghostScript != null)
+            {
+                ghostScript.TurnGhostRegularColor();
+            }
+        }
     }
 }

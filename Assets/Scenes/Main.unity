@@ -668,6 +668,7 @@ MonoBehaviour:
   dots: {fileID: 1270961263}
   powerUps: {fileID: 1872678401}
   playerMovement: {fileID: 433135970}
+  playerAnimator: {fileID: 433135969}
   mazes:
   - {fileID: 936925550}
   - {fileID: 477075276}
@@ -681,7 +682,6 @@ MonoBehaviour:
   - {fileID: 2136498045}
   - {fileID: 1406498372}
   - {fileID: 1511776358}
-  playerAnimator: {fileID: 433135969}
 --- !u!114 &235911717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7056,8 +7056,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc0963cfb0b96204c841793097663493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointsText: {fileID: 0}
   ghost: {fileID: 1406498372}
   ghostMoveScript: {fileID: 1406498375}
+  ghostSprite: {fileID: 21300000, guid: a76d5d0da6369804b96be1b74385027a, type: 3}
+  blueGhostSprite: {fileID: 21300000, guid: a88ec3d42ef8904488675e767579c6a2, type: 3}
+  spriteRenderer: {fileID: 1406498373}
+  boxCollider2D: {fileID: 1406498377}
 --- !u!1 &1426674559
 GameObject:
   m_ObjectHideFlags: 0
@@ -11836,8 +11841,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc0963cfb0b96204c841793097663493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointsText: {fileID: 0}
   ghost: {fileID: 1511776358}
   ghostMoveScript: {fileID: 1511776361}
+  ghostSprite: {fileID: 21300000, guid: 3db7b1b8fd463804cb722d4aea8590b6, type: 3}
+  blueGhostSprite: {fileID: 21300000, guid: a88ec3d42ef8904488675e767579c6a2, type: 3}
+  spriteRenderer: {fileID: 1511776359}
+  boxCollider2D: {fileID: 1511776363}
 --- !u!1 &1537287509 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5447507328059018949, guid: 0763579ad4a71064c86c09bf70fe5957,
@@ -12231,8 +12241,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc0963cfb0b96204c841793097663493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointsText: {fileID: 0}
   ghost: {fileID: 1600359945}
   ghostMoveScript: {fileID: 1600359948}
+  ghostSprite: {fileID: 21300000, guid: 1a29b7ff0731bc647a0817b9fa587849, type: 3}
+  blueGhostSprite: {fileID: 21300000, guid: a88ec3d42ef8904488675e767579c6a2, type: 3}
+  spriteRenderer: {fileID: 1600359946}
+  boxCollider2D: {fileID: 1600359950}
 --- !u!1 &1606015088 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5447507329156664471, guid: 0763579ad4a71064c86c09bf70fe5957,
@@ -13649,8 +13664,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc0963cfb0b96204c841793097663493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointsText: {fileID: 0}
   ghost: {fileID: 2136498045}
   ghostMoveScript: {fileID: 2136498048}
+  ghostSprite: {fileID: 21300000, guid: cd9f1f3acfbea7844b508be055c4b905, type: 3}
+  blueGhostSprite: {fileID: 21300000, guid: a88ec3d42ef8904488675e767579c6a2, type: 3}
+  spriteRenderer: {fileID: 2136498046}
+  boxCollider2D: {fileID: 2136498050}
 --- !u!1 &2145231512 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5447507328325995222, guid: 0763579ad4a71064c86c09bf70fe5957,

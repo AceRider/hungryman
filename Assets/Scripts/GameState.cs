@@ -12,4 +12,5 @@ public class GameState : MonoBehaviour
     public static int numberOfLives = 3;
     public static int extraLifePoints;
     public static bool hasExtraLifeBeenGiven;
+    public static int consecutiveGhostsEaten;
 }
