@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
         GameState.powerUpCount = 4;
         uiController.DisplayLivesImages();
         StartCoroutine(HandleMoveGhosts());
+        StartCoroutine(HandleReadyText());
         IncreaseScore(true);
         GotPowerUp(true);
         GhostCollider(true);
@@ -338,5 +339,18 @@ public class GameManager : MonoBehaviour
                 ghostScript.TurnGhostRegularColor();
             }
         }
+    }
+
+    IEnumerator HandleReadyText()
+    {
+        int timer = 0;
+
+        while(timer < 1)
+        {
+            timer++;
+            yield return new WaitForSeconds(1);
+        }
+
+        uiController.ToggleReadyText(false);
     }
 }

@@ -9,6 +9,8 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private TMPro.TextMeshProUGUI highScoreText;
     [SerializeField]
+    private TMPro.TextMeshProUGUI readyText;
+    [SerializeField]
     private List<GameObject> levelIndicators;
     [SerializeField]
     private List<GameObject> lives;
@@ -39,5 +41,9 @@ public class UIController : MonoBehaviour
         {
             lives[i].SetActive(true);
         }
+    }
+    public void ToggleReadyText(bool shouldShow)
+    {
+        readyText.gameObject.SetActive(shouldShow);
     }
 }
